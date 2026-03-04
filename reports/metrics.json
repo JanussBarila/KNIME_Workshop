@@ -1,0 +1,168 @@
+{
+  "data": {
+    "n_rows": 7043,
+    "n_train": 5634,
+    "n_test": 1409
+  },
+  "models": {
+    "logistic_regression": {
+      "train_auc": 0.8400174213634797,
+      "test_auc": 0.8563409026324631
+    },
+    "random_forest": {
+      "train_auc": 0.8869020597772552,
+      "test_auc": 0.8625823451910438
+    }
+  },
+  "selected_model": "random_forest",
+  "decision_threshold": 0.3,
+  "best_f1": 0.6530147895335608,
+  "test_metrics_selected_model": {
+    "accuracy": 0.7835344215755855,
+    "precision": 0.5683168316831683,
+    "recall": 0.767379679144385,
+    "auc": 0.8625823451910438,
+    "confusion_matrix": [
+      [
+        817,
+        218
+      ],
+      [
+        87,
+        287
+      ]
+    ]
+  },
+  "top_logistic_coefficients": [
+    {
+      "feature": "tenure",
+      "coefficient": -0.6184193642468718
+    },
+    {
+      "feature": "MonthlyCharges",
+      "coefficient": 0.3509486755740008
+    },
+    {
+      "feature": "Contract__Two year",
+      "coefficient": -0.33673940364202953
+    },
+    {
+      "feature": "PaperlessBilling__No",
+      "coefficient": -0.32284084859557266
+    },
+    {
+      "feature": "InternetService__DSL",
+      "coefficient": -0.3227744067029222
+    },
+    {
+      "feature": "Contract__Month-to-month",
+      "coefficient": 0.283438304679447
+    },
+    {
+      "feature": "TechSupport__Yes",
+      "coefficient": -0.2577398498539123
+    },
+    {
+      "feature": "PhoneService__Yes",
+      "coefficient": -0.2532963681763742
+    },
+    {
+      "feature": "OnlineSecurity__Yes",
+      "coefficient": -0.25223495585783895
+    },
+    {
+      "feature": "MultipleLines__No",
+      "coefficient": -0.2274052410689494
+    },
+    {
+      "feature": "TotalCharges",
+      "coefficient": -0.22520278167788532
+    },
+    {
+      "feature": "InternetService__Fiber optic",
+      "coefficient": 0.2131683426255464
+    },
+    {
+      "feature": "Contract__One year",
+      "coefficient": -0.20504963444547852
+    },
+    {
+      "feature": "Dependents__Yes",
+      "coefficient": -0.19338040783769994
+    },
+    {
+      "feature": "PaymentMethod__Electronic check",
+      "coefficient": 0.18248290734470057
+    }
+  ],
+  "top_tree_importances": [
+    {
+      "feature": "tenure",
+      "importance": 0.16011558368772386
+    },
+    {
+      "feature": "Contract__Month-to-month",
+      "importance": 0.0989278512475284
+    },
+    {
+      "feature": "TotalCharges",
+      "importance": 0.09645472473318822
+    },
+    {
+      "feature": "OnlineSecurity__No",
+      "importance": 0.07199399639476038
+    },
+    {
+      "feature": "InternetService__Fiber optic",
+      "importance": 0.05596083197319244
+    },
+    {
+      "feature": "Contract__Two year",
+      "importance": 0.05334342502807313
+    },
+    {
+      "feature": "MonthlyCharges",
+      "importance": 0.05048433581287368
+    },
+    {
+      "feature": "TechSupport__No",
+      "importance": 0.045876188858819895
+    },
+    {
+      "feature": "InternetService__DSL",
+      "importance": 0.029304458638486283
+    },
+    {
+      "feature": "DeviceProtection__No",
+      "importance": 0.02545186861461338
+    },
+    {
+      "feature": "PaymentMethod__Electronic check",
+      "importance": 0.02511058206342116
+    },
+    {
+      "feature": "OnlineSecurity__Yes",
+      "importance": 0.02194281913378937
+    },
+    {
+      "feature": "TechSupport__Yes",
+      "importance": 0.021063086582959103
+    },
+    {
+      "feature": "PaperlessBilling__No",
+      "importance": 0.016090702151265138
+    },
+    {
+      "feature": "PaperlessBilling__Yes",
+      "importance": 0.016082040742446756
+    }
+  ],
+  "high_value_summary": {
+    "definition_selected": "Rule A: TotalCharges >= 3000, tenure >= 24 months, contract in {One year, Two year}",
+    "high_value_pct": 0.22788584410052534,
+    "high_value_count": 1605,
+    "high_value_high_risk_pct": 0.01059190031152648,
+    "high_value_high_risk_count": 17
+  },
+  "backend": "custom_python_fallback"
+}
