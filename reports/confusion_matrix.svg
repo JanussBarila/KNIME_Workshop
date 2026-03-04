@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420" height="360">
+<rect width="100%" height="100%" fill="white"/>
+<text x="210" y="30" text-anchor="middle" font-size="20">Confusion Matrix</text>
+<text x="210" y="345" text-anchor="middle" font-size="14">Predicted Label</text>
+<text x="20" y="180" text-anchor="middle" font-size="14" transform="rotate(-90 20,180)">Actual Label</text>
+<rect x="90" y="70" width="100" height="100" fill="rgb(85,85,255)" stroke="black"/>
+<text x="140.0" y="125.0" text-anchor="middle" font-size="20">817</text>
+<rect x="190" y="70" width="100" height="100" fill="rgb(209,209,255)" stroke="black"/>
+<text x="240.0" y="125.0" text-anchor="middle" font-size="20">218</text>
+<rect x="90" y="170" width="100" height="100" fill="rgb(236,236,255)" stroke="black"/>
+<text x="140.0" y="225.0" text-anchor="middle" font-size="20">87</text>
+<rect x="190" y="170" width="100" height="100" fill="rgb(195,195,255)" stroke="black"/>
+<text x="240.0" y="225.0" text-anchor="middle" font-size="20">287</text>
+<text x="140.0" y="55" text-anchor="middle" font-size="12">No Churn</text>
+<text x="240.0" y="55" text-anchor="middle" font-size="12">Churn</text>
+<text x="72" y="124.0" text-anchor="middle" font-size="12">No Churn</text>
+<text x="72" y="224.0" text-anchor="middle" font-size="12">Churn</text>
+</svg>
