@@ -4,15 +4,15 @@ An end-to-end analytics project that turns 7,043 anonymized telecom customer rec
 
 ## Executive summary
 
-- **Selected model:** Random Forest
-- **Test ROC-AUC:** 0.863
-- **Decision threshold:** 0.30
-- **Recall:** 0.767
-- **Precision:** 0.568
+- **Selected model:** Logistic Regression
+- **Test ROC-AUC:** 0.842
+- **Decision threshold:** 0.28
+- **Recall:** 0.781
+- **Precision:** 0.518
 - **High-value customers:** 1,605 (22.8% of the customer base)
-- **High-value customers flagged at risk:** 17 (1.1% of the high-value segment)
+- **High-value customers flagged at risk:** 59 (3.7% of the high-value segment)
 
-The lower 0.30 threshold prioritizes recall: it captures more potential churners when missing a customer is considered more costly than reviewing a false positive.
+Logistic Regression generalized better than Random Forest on the holdout set (0.842 vs 0.820 test ROC-AUC), while the Random Forest showed clear overfitting. The lower 0.28 operating threshold prioritizes recall: it captures more potential churners when missing a customer is considered more costly than reviewing a false positive.
 
 ## Business findings
 
