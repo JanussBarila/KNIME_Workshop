@@ -1,72 +1,54 @@
 # Churn Risk Recommendations
 
-## (a) Account characteristics most linked to churn probability
+## Main churn signals
 
-Across both Logistic Regression and Random Forest diagnostics, the strongest churn-linked characteristics are:
+Across model diagnostics and descriptive analysis, the strongest recurring signals are:
 
-1. **Contract structure (largest business driver):**
-   - Month-to-month customers have much higher churn propensity.
-   - One- and two-year contracts are strongly protective.
-2. **Tenure:**
-   - Short-tenure accounts are substantially more likely to churn.
-3. **Price pressure:**
-   - Higher `MonthlyCharges` is associated with higher churn risk.
-4. **Service experience / value realization:**
-   - No `OnlineSecurity` and no `TechSupport` increase risk.
-   - Fiber optic accounts show elevated churn rates in descriptive data, likely reflecting pricing expectations and service-value mismatch.
-5. **Payment behavior:**
-   - Electronic check users exhibit the highest observed churn rates.
+1. Month-to-month contracts and short tenure
+2. Higher price exposure and cumulative charges
+3. Missing online security or technical support
+4. Fiber-optic service patterns that may reflect a value or service-expectation gap
+5. Electronic-check payments
 
-Descriptive churn rates reinforce these model patterns:
-- Month-to-month churn rate: **42.7%** (vs 11.3% one-year, 2.8% two-year)
-- Fiber optic churn rate: **41.9%**
-- Electronic check churn rate: **45.3%**
-- No tech support churn rate: **41.6%**
+Descriptive churn rates reinforce these patterns: month-to-month customers, fiber-optic users, electronic-check users, and customers without technical support all show elevated churn.
 
-## (b) Proportion of high value customers at risk of terminating
+## At-risk definition
 
-### At-risk threshold choice
-We define “at risk” as predicted churn probability **>= 0.30**.
+A customer is flagged at risk when predicted churn probability is **at least 0.28**. This threshold maximized F1 on the holdout set and produced:
 
-**Reasoning:**
-- Threshold selected by maximizing **F1** on holdout data, balancing precision and recall.
-- At 0.30, recall is prioritized (0.767), which is suitable when retention teams prefer to capture more potential churners and can tolerate some false positives.
+- Recall: **0.781**
+- Precision: **0.518**
+- ROC-AUC: **0.842**
 
-### Estimate for selected high value definition
-High value definition selected:
+The threshold favors recall, which is appropriate when the retention team can review a broader queue and the cost of missing a likely churner is high.
+
+## High-value exposure
+
+The selected high-value rule requires:
+
 - `TotalCharges >= 3000`
 - `tenure >= 24`
-- `Contract in {One year, Two year}`
+- `Contract` of one or two years
 
 Results:
-- High value customers: **22.8%** of base (1,605 / 7,043)
-- High value customers at risk (p >= 0.30): **1.1%** of high value segment (17 / 1,605)
 
-This indicates the core value base is relatively stable, but a small subset still merits proactive save actions.
+- High-value customers: **1,605 of 7,043 (22.8%)**
+- High-value customers flagged at risk: **59 of 1,605 (3.7%)**
 
-## (c) Incentives for at-risk high value customers
+## Recommended interventions
 
-1. **Contract Renewal Protection Offer**
-   - Target: At-risk high value accounts with contract nearing renewal or weaker commitment signals.
-   - Offer: 12–24 month renewal with loyalty credit and price lock.
-   - Rationale: Contract length is the strongest protective factor.
+1. **Contract renewal protection** — offer a loyalty credit or price lock for a 12–24 month renewal.
+2. **Bill optimization review** — right-size high-charge accounts before price pressure becomes cancellation intent.
+3. **Premium care and security trial** — give at-risk customers without support or security a time-limited service trial.
+4. **Automatic-payment incentive** — encourage electronic-check users to move to automatic payment.
 
-2. **Bill Optimization Bundle**
-   - Target: High monthly-charge accounts with elevated churn risk.
-   - Offer: Personalized plan review + right-sized bundle + temporary discount taper (e.g., 3 months).
-   - Rationale: Reduces price shock while preserving long-term value.
+## Operating recommendation
 
-3. **Premium Care + Security Add-on**
-   - Target: At-risk customers lacking TechSupport/OnlineSecurity.
-   - Offer: Complimentary 90-day premium support and security pack trial.
-   - Rationale: Model signals these add-ons materially reduce churn propensity.
+Rank the contact queue by:
 
-4. **Payment Method Retention Nudge**
-   - Target: Electronic check users in high-risk buckets.
-   - Offer: Incentive to switch to auto-pay (small recurring bill credit).
-   - Rationale: Payment behavior is strongly associated with churn risk and can be operationally changed quickly.
+1. High-value flag
+2. Predicted churn probability
+3. Margin or ARPU
 
-## Implementation note
-Prioritize intervention queue by:
-1) high-value flag, then 2) predicted churn probability descending, then 3) margin/ARPU.
-This concentrates retention spend where business value and risk are both highest.
+Start with a controlled pilot. Measure incremental save rate, retained margin, offer acceptance, and cost per saved customer against a holdout group before scaling.
+
