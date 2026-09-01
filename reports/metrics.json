@@ -1,4 +1,5 @@
 {
+  "backend": "sklearn",
   "data": {
     "n_rows": 7043,
     "n_train": 5634,
@@ -6,163 +7,162 @@
   },
   "models": {
     "logistic_regression": {
-      "train_auc": 0.8400174213634797,
-      "test_auc": 0.8563409026324631
+      "train_auc": 0.849265207937225,
+      "test_auc": 0.8418739827946988
     },
     "random_forest": {
-      "train_auc": 0.8869020597772552,
-      "test_auc": 0.8625823451910438
+      "train_auc": 0.9999255794259838,
+      "test_auc": 0.8200547676251002
     }
   },
-  "selected_model": "random_forest",
-  "decision_threshold": 0.3,
-  "best_f1": 0.6530147895335608,
+  "selected_model": "logistic_regression",
+  "decision_threshold": 0.28,
+  "best_f1": 0.6226012793176972,
   "test_metrics_selected_model": {
-    "accuracy": 0.7835344215755855,
-    "precision": 0.5683168316831683,
-    "recall": 0.767379679144385,
-    "auc": 0.8625823451910438,
+    "accuracy": 0.7487579843860894,
+    "precision": 0.5177304964539007,
+    "recall": 0.7807486631016043,
+    "auc": 0.8418739827946988,
     "confusion_matrix": [
       [
-        817,
-        218
+        763,
+        272
       ],
       [
-        87,
-        287
+        82,
+        292
       ]
     ]
   },
   "top_logistic_coefficients": [
     {
-      "feature": "tenure",
-      "coefficient": -0.6184193642468718
+      "feature": "num__tenure",
+      "coefficient": -1.2410146420359107
     },
     {
-      "feature": "MonthlyCharges",
-      "coefficient": 0.3509486755740008
+      "feature": "cat__Contract_Two year",
+      "coefficient": -0.7730038580942861
     },
     {
-      "feature": "Contract__Two year",
-      "coefficient": -0.33673940364202953
+      "feature": "cat__InternetService_DSL",
+      "coefficient": -0.6526398838380132
     },
     {
-      "feature": "PaperlessBilling__No",
-      "coefficient": -0.32284084859557266
+      "feature": "cat__InternetService_Fiber optic",
+      "coefficient": 0.6401845184527245
     },
     {
-      "feature": "InternetService__DSL",
-      "coefficient": -0.3227744067029222
+      "feature": "num__MonthlyCharges",
+      "coefficient": -0.5963790776976509
     },
     {
-      "feature": "Contract__Month-to-month",
-      "coefficient": 0.283438304679447
+      "feature": "cat__Contract_Month-to-month",
+      "coefficient": 0.5798533044252829
     },
     {
-      "feature": "TechSupport__Yes",
-      "coefficient": -0.2577398498539123
+      "feature": "num__TotalCharges",
+      "coefficient": 0.5162802030597688
     },
     {
-      "feature": "PhoneService__Yes",
-      "coefficient": -0.2532963681763742
+      "feature": "cat__PaperlessBilling_No",
+      "coefficient": -0.34308834425291646
     },
     {
-      "feature": "OnlineSecurity__Yes",
-      "coefficient": -0.25223495585783895
+      "feature": "cat__InternetService_No",
+      "coefficient": -0.3010636340621073
     },
     {
-      "feature": "MultipleLines__No",
-      "coefficient": -0.2274052410689494
+      "feature": "cat__OnlineSecurity_No internet service",
+      "coefficient": -0.3010636340621073
     },
     {
-      "feature": "TotalCharges",
-      "coefficient": -0.22520278167788532
+      "feature": "cat__OnlineBackup_No internet service",
+      "coefficient": -0.3010636340621073
     },
     {
-      "feature": "InternetService__Fiber optic",
-      "coefficient": 0.2131683426255464
+      "feature": "cat__DeviceProtection_No internet service",
+      "coefficient": -0.3010636340621073
     },
     {
-      "feature": "Contract__One year",
-      "coefficient": -0.20504963444547852
+      "feature": "cat__TechSupport_No internet service",
+      "coefficient": -0.3010636340621073
     },
     {
-      "feature": "Dependents__Yes",
-      "coefficient": -0.19338040783769994
+      "feature": "cat__StreamingTV_No internet service",
+      "coefficient": -0.3010636340621073
     },
     {
-      "feature": "PaymentMethod__Electronic check",
-      "coefficient": 0.18248290734470057
+      "feature": "cat__StreamingMovies_No internet service",
+      "coefficient": -0.3010636340621073
     }
   ],
   "top_tree_importances": [
     {
-      "feature": "tenure",
-      "importance": 0.16011558368772386
+      "feature": "num__TotalCharges",
+      "importance": 0.15887406213188085
     },
     {
-      "feature": "Contract__Month-to-month",
-      "importance": 0.0989278512475284
+      "feature": "num__tenure",
+      "importance": 0.13772978828981916
     },
     {
-      "feature": "TotalCharges",
-      "importance": 0.09645472473318822
+      "feature": "num__MonthlyCharges",
+      "importance": 0.13715451761338576
     },
     {
-      "feature": "OnlineSecurity__No",
-      "importance": 0.07199399639476038
+      "feature": "cat__Contract_Month-to-month",
+      "importance": 0.05689511534848563
     },
     {
-      "feature": "InternetService__Fiber optic",
-      "importance": 0.05596083197319244
+      "feature": "cat__OnlineSecurity_No",
+      "importance": 0.032021152308612945
     },
     {
-      "feature": "Contract__Two year",
-      "importance": 0.05334342502807313
+      "feature": "cat__PaymentMethod_Electronic check",
+      "importance": 0.03022633745502422
     },
     {
-      "feature": "MonthlyCharges",
-      "importance": 0.05048433581287368
+      "feature": "cat__InternetService_Fiber optic",
+      "importance": 0.027826095597857457
     },
     {
-      "feature": "TechSupport__No",
-      "importance": 0.045876188858819895
+      "feature": "cat__TechSupport_No",
+      "importance": 0.026150567285776506
     },
     {
-      "feature": "InternetService__DSL",
-      "importance": 0.029304458638486283
+      "feature": "num__SeniorCitizen",
+      "importance": 0.019642740922110484
     },
     {
-      "feature": "DeviceProtection__No",
-      "importance": 0.02545186861461338
+      "feature": "cat__gender_Female",
+      "importance": 0.017876054528711684
     },
     {
-      "feature": "PaymentMethod__Electronic check",
-      "importance": 0.02511058206342116
+      "feature": "cat__gender_Male",
+      "importance": 0.01768951848325515
     },
     {
-      "feature": "OnlineSecurity__Yes",
-      "importance": 0.02194281913378937
+      "feature": "cat__Contract_Two year",
+      "importance": 0.017594391864004494
     },
     {
-      "feature": "TechSupport__Yes",
-      "importance": 0.021063086582959103
+      "feature": "cat__OnlineBackup_No",
+      "importance": 0.016937221036971352
     },
     {
-      "feature": "PaperlessBilling__No",
-      "importance": 0.016090702151265138
+      "feature": "cat__DeviceProtection_No",
+      "importance": 0.015699959583413383
     },
     {
-      "feature": "PaperlessBilling__Yes",
-      "importance": 0.016082040742446756
+      "feature": "cat__PaperlessBilling_No",
+      "importance": 0.01557953243232113
     }
   ],
   "high_value_summary": {
     "definition_selected": "Rule A: TotalCharges >= 3000, tenure >= 24 months, contract in {One year, Two year}",
     "high_value_pct": 0.22788584410052534,
     "high_value_count": 1605,
-    "high_value_high_risk_pct": 0.01059190031152648,
-    "high_value_high_risk_count": 17
-  },
-  "backend": "custom_python_fallback"
+    "high_value_high_risk_pct": 0.0367601246105919,
+    "high_value_high_risk_count": 59
+  }
 }
