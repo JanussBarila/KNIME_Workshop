@@ -47,8 +47,14 @@ def save_roc_svg(fpr_lr, tpr_lr, fpr_rf, tpr_rf, out_path):
         f'<line x1="{pad}" y1="{h-pad}" x2="{pad}" y2="{pad}" stroke="black"/>',
         f'<line x1="{pad}" y1="{h-pad}" x2="{w-pad}" y2="{pad}" stroke="#aaaaaa" stroke-dasharray="5,5"/>',
         '<text x="320" y="30" text-anchor="middle" font-size="20">ROC Curve</text>',
+        '<text x="320" y="445" text-anchor="middle" font-size="14">False Positive Rate</text>',
+        '<text x="18" y="230" text-anchor="middle" font-size="14" transform="rotate(-90 18,230)">True Positive Rate</text>',
         poly(list(zip(fpr_lr, tpr_lr)), "#1f77b4"),
         poly(list(zip(fpr_rf, tpr_rf)), "#d62728"),
+        '<line x1="410" y1="48" x2="445" y2="48" stroke="#1f77b4" stroke-width="2"/>',
+        '<text x="452" y="53" font-size="13">Logistic Regression</text>',
+        '<line x1="410" y1="68" x2="445" y2="68" stroke="#d62728" stroke-width="2"/>',
+        '<text x="452" y="73" font-size="13">Random Forest</text>',
         '</svg>'
     ]
     out_path.write_text("\n".join(lines), encoding="utf-8")
@@ -59,7 +65,13 @@ def save_confusion_matrix_svg(cm, out_path):
     x0, y0, s = 90, 70, 100
     vals = [cm[0][0], cm[0][1], cm[1][0], cm[1][1]]
     maxv = max(vals) if max(vals) else 1
-    lines = [f'<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}">', '<rect width="100%" height="100%" fill="white"/>']
+    lines = [
+        f'<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}">',
+        '<rect width="100%" height="100%" fill="white"/>',
+        '<text x="210" y="30" text-anchor="middle" font-size="20">Confusion Matrix</text>',
+        '<text x="210" y="345" text-anchor="middle" font-size="14">Predicted Label</text>',
+        '<text x="20" y="180" text-anchor="middle" font-size="14" transform="rotate(-90 20,180)">Actual Label</text>',
+    ]
     idx = 0
     for r in range(2):
         for c in range(2):
@@ -69,6 +81,12 @@ def save_confusion_matrix_svg(cm, out_path):
             lines.append(f'<rect x="{x}" y="{y}" width="{s}" height="{s}" fill="rgb({shade},{shade},255)" stroke="black"/>')
             lines.append(f'<text x="{x+s/2}" y="{y+s/2+5}" text-anchor="middle" font-size="20">{v}</text>')
             idx += 1
+    lines.extend([
+        '<text x="140" y="55" text-anchor="middle" font-size="12">No Churn</text>',
+        '<text x="240" y="55" text-anchor="middle" font-size="12">Churn</text>',
+        '<text x="72" y="124" text-anchor="middle" font-size="12">No Churn</text>',
+        '<text x="72" y="224" text-anchor="middle" font-size="12">Churn</text>',
+    ])
     lines.append('</svg>')
     out_path.write_text("\n".join(lines), encoding="utf-8")
 
