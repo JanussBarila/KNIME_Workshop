@@ -6,8 +6,9 @@ from collections import Counter, defaultdict
 from pathlib import Path
 
 RANDOM_STATE = 42
-DATA_PATH = Path("WA_Fn-UseC_-Telco-Customer-Churn_Data (5).csv")
-REPORTS_DIR = Path("reports")
+ROOT = Path(__file__).resolve().parent.parent
+DATA_PATH = ROOT / "telco_churn.csv"
+REPORTS_DIR = ROOT / "reports"
 
 
 # ---------- Utility metrics ----------
