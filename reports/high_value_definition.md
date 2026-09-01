@@ -1,6 +1,6 @@
-# High Value Customer Definition
+# High-Value Customer Definition
 
-## Proposed function (selected)
+## Selected rule
 
 ```python
 def is_high_value_customer(row: dict) -> bool:
@@ -11,47 +11,21 @@ def is_high_value_customer(row: dict) -> bool:
     )
 ```
 
-### Why this is defensible
-This rule identifies customers with:
-1. **Large cumulative revenue** (`TotalCharges >= 3000`),
-2. **Proven relationship longevity** (`tenure >= 24`), and
-3. **Contract commitment** (annual or multi-year contract), which is typically aligned with higher lifetime value and lower servicing volatility.
+The rule combines cumulative revenue, established tenure, and contract commitment. It is intentionally conservative and easy for commercial teams to explain and reproduce.
 
-This captures economically meaningful, stable customers that are expensive to lose.
+## Coverage and risk
 
----
+- High-value customers: **1,605 of 7,043 (22.8%)**
+- Selected churn threshold: **0.28**
+- High-value customers flagged at risk: **59 of 1,605 (3.7%)**
 
-## Alternative definitions considered
+This segment should be used as a prioritization gate rather than a complete customer-lifetime-value model. A production definition would also include contribution margin, service costs, discounts, payment behavior, and expected future revenue.
 
-### Alternative A (selected): Lifetime-value stability rule
-- `TotalCharges >= 3000`
-- `tenure >= 24`
-- `Contract in {One year, Two year}`
+## Alternatives considered
 
-**Coverage and risk estimate:**
-- High value customers: **22.8%** of base (1,605 of 7,043)
-- Predicted high-risk among high value (threshold = 0.30): **1.1%** (17 of 1,605)
+- Current high monthly charges plus premium-service use
+- Very high cumulative spend and long tenure
+- A continuous CLV score rather than a binary rule
 
-### Alternative B: Current ARPU + premium service intensity
-- `MonthlyCharges >= 75`
-- `tenure >= 12`
-- `InternetService == Fiber optic`
+The selected rule was preferred for this project because it balances business relevance with transparency.
 
-**Coverage and risk estimate:**
-- High value customers: **29.7%**
-- Predicted high-risk among high value: **47.4%**
-
-### Alternative C: Ultra-high spend long-tenure segment
-- `TotalCharges >= 5000`
-- `tenure >= 36`
-
-**Coverage and risk estimate:**
-- High value customers: **16.1%**
-- Predicted high-risk among high value: **11.8%**
-
----
-
-## Final choice
-We select **Alternative A** for management reporting because it aligns best with classical CLV logic (revenue depth + tenure + commitment) and gives a clear, conservative target segment for retention protection.
-
-For campaign design, Alternative B can be used as an **“expansion risk” segment** because it surfaces more potentially churning, high-bill users.
