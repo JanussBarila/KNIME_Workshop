@@ -1,57 +1,41 @@
 # Model Diagnostics Appendix
 
-## 1) ROC AUC Summary
+## Model comparison
 
-| Model | Train AUC | Test AUC |
-|---|---:|---:|
-| Logistic Regression | 0.840 | 0.856 |
-| Random Forest (tree-based) | 0.887 | 0.863 |
+| Model | Train ROC-AUC | Test ROC-AUC | Assessment |
+| --- | ---: | ---: | --- |
+| Logistic Regression | 0.849 | 0.842 | Best holdout performance; selected |
+| Random Forest | 1.000 | 0.820 | Strong train performance but clear overfitting |
 
-**Interpretation:**
-- Both models separate churners vs. non-churners well (AUC > 0.85).
-- The Random Forest delivered the strongest test discrimination (0.863), so it is the selected model for operational recommendations.
-- The train–test gap is larger for the Random Forest than for Logistic Regression, indicating mild overfit risk, but test performance still improves over logistic.
+Logistic Regression was selected because it generalized better to unseen data and offers more interpretable coefficients. The Random Forest remains useful as a nonlinear benchmark, but its train–test gap is too large to prefer for this analysis.
 
-## 2) Logistic Regression Coefficient Diagnostics (Top Absolute Coefficients)
+## Selected-model operating point
 
-Signs are interpreted as effect on churn likelihood, holding other variables constant.
+The probability threshold was selected by maximizing F1 across values from 0.20 to 0.80 on the holdout set.
 
-| Rank | Feature | Coefficient | Direction |
-|---|---|---:|---|
-| 1 | tenure | -0.618 | Longer tenure lowers churn risk |
-| 2 | MonthlyCharges | +0.351 | Higher monthly bills increase churn risk |
-| 3 | Contract__Two year | -0.337 | 2-year contracts strongly reduce churn |
-| 4 | PaperlessBilling__No | -0.323 | Not using paperless billing is associated with lower churn |
-| 5 | InternetService__DSL | -0.323 | DSL users churn less than baseline categories |
-| 6 | Contract__Month-to-month | +0.283 | Month-to-month customers are more likely to churn |
-| 7 | TechSupport__Yes | -0.258 | Having tech support lowers churn risk |
-| 8 | PhoneService__Yes | -0.253 | Phone service usage is associated with lower churn |
+- Threshold: **0.28**
+- Accuracy: **0.749**
+- Precision: **0.518**
+- Recall: **0.781**
+- ROC-AUC: **0.842**
+- F1: **0.623**
+- Confusion matrix: TN = 763, FP = 272, FN = 82, TP = 292
 
-## 3) Tree Model Feature Importance (Top Drivers)
+The threshold intentionally favors recall because missing a likely churner can be more costly than reviewing a false positive. A production threshold should ultimately be selected from contact capacity, intervention cost, customer value, and expected save rate.
 
-| Rank | Feature | Importance |
-|---|---|---:|
-| 1 | tenure | 0.160 |
-| 2 | Contract__Month-to-month | 0.099 |
-| 3 | TotalCharges | 0.096 |
-| 4 | OnlineSecurity__No | 0.072 |
-| 5 | InternetService__Fiber optic | 0.056 |
-| 6 | Contract__Two year | 0.053 |
-| 7 | MonthlyCharges | 0.050 |
-| 8 | TechSupport__No | 0.046 |
+## Main signals
 
-## 4) Additional Test-set Metrics for Selected Model (Random Forest)
+The models and descriptive analysis consistently highlight:
 
-- Threshold used for binary classification: **0.30** (selected by best F1 on holdout test set).
-- Accuracy: **0.784**
-- Precision: **0.568**
-- Recall: **0.767**
-- Confusion Matrix (Actual rows x Predicted columns):
-  - TN = 817, FP = 218
-  - FN = 87, TP = 287
+1. Tenure and contract structure
+2. Monthly and cumulative charges
+3. Internet-service type
+4. Online security and technical support
+5. Electronic-check payments
 
-## 5) What these diagnostics mean in practice
+Coefficient signs in the multivariate Logistic Regression should not be read as isolated causal effects. Correlated billing and service variables can change coefficient direction after controlling for the rest of the feature set.
 
-- **AUC** tells us ranking quality independent of a fixed threshold. AUC near 0.86 means strong prioritization ability for retention outreach.
-- **Precision vs. Recall trade-off:** At threshold 0.30, the model intentionally favors recall (catching more likely churners), appropriate for churn prevention where missing a churner can be costly.
-- **Feature diagnostics** from both models consistently point to contract type, tenure, service/security add-ons, and price exposure as central churn drivers.
+## Practical interpretation
+
+The model is suitable for prioritizing a retention queue in a portfolio setting. Production use would require out-of-time validation, cost-based threshold selection, probability calibration, drift monitoring, bias checks, and measurement of campaign uplift.
+
